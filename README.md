@@ -3,18 +3,23 @@ HoneyCreds network credential injection to detect responder and other network po
 ![HoneyCreds Screenshot](/honeycreds_screenshot.png?raw=true "HoneyCreds Screenshot")
 
 # Requirements
+```
 Requires Python 3.6+ (tested on Python 3.9)
 smbprotocol
 cffi
+```
 
 # Installation
 ```
 git clone https://github.com/Ben0xA/HoneyCreds.git
+cd HoneyCreds
 pip3 install -r requirements.txt
 ```
 
 # Running
+```
 python3 honeycreds.py
+```
 
 # Settings
 It is advised that you change these settings to best suit your environment. Note: You can use an existing account, just change the password.
