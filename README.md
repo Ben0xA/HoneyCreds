@@ -1,6 +1,6 @@
 # HoneyCreds
 HoneyCreds network credential injection to detect responder and other network poisoners.
-![HoneyCreds Screenshot](/screenshot.png?raw=true "HoneyCreds Screenshot")
+![HoneyCreds Screenshot](/honeycreds_screenshot.png?raw=true "HoneyCreds Screenshot")
 
 # Requirements
 Requires Python 3.6+ (tested on Python 3.9)
