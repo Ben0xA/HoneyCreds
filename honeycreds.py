@@ -21,19 +21,38 @@ import requests
 import threading
 from signal import signal, SIGINT
 
+# --------- SETTINGS ----------
 # You can set these once or specify them on the command line.
 # Please... change these... really. If I see this on a pentest, I will cry.
-def_username = 'honeycreds'
+
+#Choose a legit looking username
+def_username = 'honeycreds' 
+
+#This can match your current Short Domain
 def_domain   = 'XQQX'
+
+#Make this whatever you want. Note: HTTP requests will send this in plaintext
 def_password = 'This is a honey cred account.'
+
+#The FQDN. Leave .local at the end.
 def_fqdn     = 'xqqx.local'
+
+#The hostname that DOES NOT EXIST but looks legit.
 def_hostname = 'HNECRD01'
+
+#The log file and location
 def_logfile  = 'honeycreds.log'
 
+#bility to turn SMB or HTTP on or off. Set to "OFF" to turn off.
 SMB = 'ON'
 HTTP = 'ON'
+
+#The time to pause in seconds between requests.
 SMB_SLEEP = 5
 HTTP_SLEEP = 12
+
+# --------- STOP ----------
+# Do not change anything below this line.
 smb_Thread = None
 http_Thread = None
 smb_exit = threading.Event()
