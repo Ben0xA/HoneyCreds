@@ -7,8 +7,10 @@ smbprotocol
 cffi
 
 # Installation
+```
 git clone https://github.com/Ben0xA/HoneyCreds.git
 pip3 install -r requirements.txt
+```
 
 # Running
 python3 honeycreds.py
