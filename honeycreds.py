@@ -55,8 +55,8 @@ HTTP = 'ON'
 SMB_SLEEP = 5
 HTTP_SLEEP = 12
 
-#Forwarders
-SPLUNK = 'ON'
+#Forwarders. Change to ON to enable the forwarder.
+SPLUNK = 'OFF'
 ELK = 'OFF' #Coming Soon
 
 #Splunk Forwarding
@@ -198,7 +198,7 @@ class SMBClient(threading.Thread):
 						else:
 							rmt_ip = drslt_parts[0]
 
-					if SPLUNK:
+					if str.upper(SPLUNK) == 'ON':
 						event = str(time.time()) + ','
 						event += 'protocol="SMB",'
 						event += 'ip_address=' + rmt_ip + ','
@@ -242,7 +242,7 @@ class HTTPClient(threading.Thread):
 						else:
 							rmt_ip = drslt_parts[0]
 
-				if SPLUNK:
+				if str.upper(SPLUNK) == 'ON':
 					event = str(time.time()) + ','
 					event += 'protocol="HTTP",'
 					event += 'ip_address=' + rmt_ip + ','
@@ -271,7 +271,7 @@ def main():
 	if str.upper(HTTP) == 'ON':
 		http_Thread = HTTPClient(username, hostname)
 		http_Thread.start()
-	if SPLUNK:
+	if str.upper(SPLUNK) == 'ON':
 		init_splunk()
 
 if __name__ == '__main__':
