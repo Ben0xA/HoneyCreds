@@ -3,14 +3,18 @@
 
 # Author: Ben Ten (Ben0xA)
 # HoneyCreds - Detecting LLMNR/NBNS/HTTP Listeners
-# Updated: 10/29/2020
-# Version: 0.1
+# Updated: 5/9/2021
+# Version: 0.2
 
 # Requires:
 # python 3
 # smbprotocol
 # cffi
+<<<<<<< HEAD
 # configparser
+=======
+# splunk-sdk
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 
 import smbclient
 import os
@@ -21,7 +25,10 @@ import sys
 import requests
 import socket
 import threading
+<<<<<<< HEAD
 import configparser
+=======
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 import splunklib.client as client
 from datetime import datetime
 from signal import signal, SIGINT
@@ -49,6 +56,49 @@ class Config:
 		self.SPLUNK_TOKEN = config_file.get('splunk', 'SPLUNK_TOKEN')
 		self.SPLUNK_INDEX = config_file.get('splunk', 'SPLUNK_INDEX')
 
+<<<<<<< HEAD
+=======
+#Choose a legit looking username
+def_username = 'honeycreds' 
+
+#This can match your current Short Domain
+def_domain   = 'TSDEV'
+
+#Make this whatever you want. Note: HTTP requests will send this in plaintext
+def_password = 'This is a honey cred account.'
+
+#The FQDN. Leave .local at the end.
+def_fqdn     = 'ts-dev-mx.local'
+
+#The hostname that DOES NOT EXIST but looks legit.
+def_hostname = 'HNECRD01'
+
+#The log file and location
+def_logfile  = 'honeycreds.log'
+
+#Ability to turn SMB or HTTP on or off. Set to "OFF" to turn off.
+SMB = 'ON'
+HTTP = 'ON'
+
+#The time to pause in seconds between requests.
+SMB_SLEEP = 5
+HTTP_SLEEP = 12
+
+#Forwarders. Change to ON to enable the forwarder.
+SPLUNK = 'OFF'
+ELK = 'OFF' #Coming Soon
+
+#Splunk Forwarding
+SPLUNK_HOSTNAME = 'localhost'
+SPLUNK_PORT = 8089
+SPLUNK_USERNAME = 'admin'
+SPLUNK_PASSWORD = None
+SPLUNK_TOKEN = None
+SPLUNK_INDEX = 'honeycreds'
+
+# --------- STOP ----------
+# Do not change anything below this line.
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 smb_Thread = None
 http_Thread = None
 smb_exit = threading.Event()
@@ -56,7 +106,10 @@ http_exit = threading.Event()
 splunk_service = None
 splunk_index = None
 local_hostname = socket.gethostname()
+<<<<<<< HEAD
 config = Config()
+=======
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 
 def signal_handler(sig, frame):	
 	global smb_Thread, http_Thread, exit
@@ -109,6 +162,20 @@ def init_splunk():
 			except:
 				print('[-] Failed to get Splunk indexes! Check configuration settings.')
 
+def init_splunk():
+	global splunk_service, splunk_index
+	global SPLUNK_HOSTNAME,SPLUNK_PORT, SPLUNK_USERNAME, SPLUNK_PASSWORD, SPLUNK_TOKEN, SPLUNK_INDEX	
+	if SPLUNK_TOKEN != None:
+		splunk_service = client.connect(host=SPLUNK_HOSTNAME, port=SPLUNK_PORT, splunkToken=SPLUNK_TOKEN)
+	else:
+		splunk_service = client.connect(host=SPLUNK_HOSTNAME, port=SPLUNK_PORT, username=SPLUNK_USERNAME, password=SPLUNK_PASSWORD)
+
+	#Get or create index
+	try:
+		splunk_index = splunk_service.indexes[SPLUNK_INDEX]
+	except:
+		splunk_index = splunk_service.indexes.create(SPLUNK_INDEX)
+
 def banner():
 	oncolor = termcolor.GREEN
 	print(termcolor.YELLOW + termcolor.BOLD + '       .-=-=-=-.        ' + termcolor.END)
@@ -124,7 +191,7 @@ def banner():
 	print(termcolor.YELLOW + termcolor.BOLD + '   (`-=-=-=-=-=-=-`)' + termcolor.END)
 	print(termcolor.YELLOW + termcolor.BOLD + '     (`-=-=-=-=-`)' + termcolor.END)
 	print(termcolor.YELLOW + termcolor.BOLD + '      `-=-=-=-=-`' + termcolor.END)
-	print(termcolor.YELLOW + '                                   Author: ' + termcolor.WHITE + termcolor.BOLD + 'Ben Ten (@ben0xa)' + termcolor.END + termcolor.WHITE + ' - ' + termcolor.YELLOW + 'Version: ' + termcolor.WHITE + termcolor.BOLD + '0.1' + termcolor.END)
+	print(termcolor.YELLOW + '                                   Author: ' + termcolor.WHITE + termcolor.BOLD + 'Ben Ten (@ben0xa)' + termcolor.END + termcolor.WHITE + ' - ' + termcolor.YELLOW + 'Version: ' + termcolor.WHITE + termcolor.BOLD + '0.2' + termcolor.END)
 	print('')
 	print(termcolor.GREEN + termcolor.BOLD + '[+]' + termcolor.END + ' Clients:')	
 	if str.upper(config.SMB) == 'OFF':
@@ -167,7 +234,11 @@ class SMBClient(threading.Thread):
 		self.hostname = hostname
 
 	def run(self):
+<<<<<<< HEAD
 		global config, smb_exit, splunk_index, local_hostname
+=======
+		global def_password, smb_exit, SPLUNK, splunk_index, local_hostname
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 		username = self.username
 		hostname = self.hostname
 		while smb_exit.is_set() == False:
@@ -190,7 +261,11 @@ class SMBClient(threading.Thread):
 						else:
 							rmt_ip = drslt_parts[0]
 
+<<<<<<< HEAD
 					if str.upper(config.SPLUNK) == 'ON' and splunk_index:
+=======
+					if str.upper(SPLUNK) == 'ON':
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 						event = str(time.time()) + ','
 						event += 'protocol="SMB",'
 						event += 'ip_address=' + rmt_ip + ','
@@ -214,13 +289,21 @@ class HTTPClient(threading.Thread):
 		self.hostname = hostname
 
 	def run(self):
+<<<<<<< HEAD
 		global config, http_exit, splunk_index, local_hostname
+=======
+		global def_password, http_exit, SPLUNK, splunk_index, local_hostname
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 		username = self.username
 		hostname = self.hostname
 		url = 'http://' + hostname
 		while http_exit.is_set() == False:			
 			try:
+<<<<<<< HEAD
 				hrsp = requests.get(url, auth=(username, config.def_password), timeout=(1,5))
+=======
+				hrsp = requests.get(url, auth=(username, def_password), timeout=(1,5))
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 				try:
 					drslt = subprocess.check_output('dig +short ' + hostname, shell=True).decode('utf-8')
 				except:
@@ -234,7 +317,11 @@ class HTTPClient(threading.Thread):
 						else:
 							rmt_ip = drslt_parts[0]
 
+<<<<<<< HEAD
 				if str.upper(config.SPLUNK) == 'ON' and splunk_index:
+=======
+				if str.upper(SPLUNK) == 'ON':
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 					event = str(time.time()) + ','
 					event += 'protocol="HTTP",'
 					event += 'ip_address=' + rmt_ip + ','
@@ -251,7 +338,11 @@ class HTTPClient(threading.Thread):
 				http_exit.wait(config.HTTP_SLEEP)
 
 def main():
+<<<<<<< HEAD
 	global config, smb_Thread, http_Thread
+=======
+	global smb_Thread, http_Thread, SPLUNK
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 	os.system('clear')
 	banner()
 	print(termcolor.GREEN + termcolor.BOLD + '[+]' + termcolor.END + ' Sending events...')
@@ -264,7 +355,13 @@ def main():
 		smb_Thread.start()
 	if str.upper(config.HTTP) == 'ON':		
 		http_Thread = HTTPClient(username, hostname)
+<<<<<<< HEAD
 		http_Thread.start()	
+=======
+		http_Thread.start()
+	if str.upper(SPLUNK) == 'ON':
+		init_splunk()
+>>>>>>> 27e1c892f57f9a285618cd1a8cedba87517db205
 
 if __name__ == '__main__':
 	signal(SIGINT, signal_handler)

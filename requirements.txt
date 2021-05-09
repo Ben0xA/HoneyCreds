@@ -1,2 +1,3 @@
 smbprotocol
 cffi
+splunk-sdk
