@@ -1,6 +1,7 @@
 # HoneyCreds
 HoneyCreds network credential injection to detect responder and other network poisoners.
 ![HoneyCreds Screenshot](/honeycreds_screenshot.png?raw=true "HoneyCreds Screenshot")
+![HoneyCreds Splunk Detection](/splunk_detection.png?raw=true "HoneyCreds Splunk Detection")
 
 # Requirements
 ```
