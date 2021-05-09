@@ -7,6 +7,7 @@ HoneyCreds network credential injection to detect responder and other network po
 Requires Python 3.6+ (tested on Python 3.9)
 smbprotocol
 cffi
+splunk-sdk
 ```
 
 # Installation
