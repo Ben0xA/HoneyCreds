@@ -132,7 +132,7 @@ def banner():
 	print(termcolor.YELLOW + termcolor.BOLD + '   (`-=-=-=-=-=-=-`)' + termcolor.END)
 	print(termcolor.YELLOW + termcolor.BOLD + '     (`-=-=-=-=-`)' + termcolor.END)
 	print(termcolor.YELLOW + termcolor.BOLD + '      `-=-=-=-=-`' + termcolor.END)
-	print(termcolor.YELLOW + '                                   Author: ' + termcolor.WHITE + termcolor.BOLD + 'Ben Ten (@ben0xa)' + termcolor.END + termcolor.WHITE + ' - ' + termcolor.YELLOW + 'Version: ' + termcolor.WHITE + termcolor.BOLD + '0.1' + termcolor.END)
+	print(termcolor.YELLOW + '                                   Author: ' + termcolor.WHITE + termcolor.BOLD + 'Ben Ten (@ben0xa)' + termcolor.END + termcolor.WHITE + ' - ' + termcolor.YELLOW + 'Version: ' + termcolor.WHITE + termcolor.BOLD + '0.2' + termcolor.END)
 	print('')
 	print(termcolor.GREEN + termcolor.BOLD + '[+]' + termcolor.END + ' Clients:')	
 	if str.upper(SMB) == 'OFF':
