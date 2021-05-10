@@ -111,18 +111,17 @@ def init_splunk():
 				print('[-] Failed to get Splunk indexes! Check configuration settings.')
 
 def init_splunk():
-	global splunk_service, splunk_index
-	global SPLUNK_HOSTNAME,SPLUNK_PORT, SPLUNK_USERNAME, SPLUNK_PASSWORD, SPLUNK_TOKEN, SPLUNK_INDEX	
-	if SPLUNK_TOKEN != None:
-		splunk_service = client.connect(host=SPLUNK_HOSTNAME, port=SPLUNK_PORT, splunkToken=SPLUNK_TOKEN)
+	global config, splunk_service, splunk_index
+	if config.SPLUNK_TOKEN != None:
+		splunk_service = client.connect(host=config.SPLUNK_HOSTNAME, port=config.SPLUNK_PORT, splunkToken=config.SPLUNK_TOKEN)
 	else:
-		splunk_service = client.connect(host=SPLUNK_HOSTNAME, port=SPLUNK_PORT, username=SPLUNK_USERNAME, password=SPLUNK_PASSWORD)
+		splunk_service = client.connect(host=config.SPLUNK_HOSTNAME, port=config.SPLUNK_PORT, username=config.SPLUNK_USERNAME, password=config.SPLUNK_PASSWORD)
 
 	#Get or create index
 	try:
-		splunk_index = splunk_service.indexes[SPLUNK_INDEX]
+		splunk_index = splunk_service.indexes[config.SPLUNK_INDEX]
 	except:
-		splunk_index = splunk_service.indexes.create(SPLUNK_INDEX)
+		splunk_index = splunk_service.indexes.create(config.SPLUNK_INDEX)
 
 def banner():
 	oncolor = termcolor.GREEN
