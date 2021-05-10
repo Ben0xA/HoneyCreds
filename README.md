@@ -26,6 +26,8 @@ python3 honeycreds.py
 # Settings
 It is advised that you change these settings to best suit your environment. Note: You can use an existing account, just change the password.
 
+Change these in honeycreds.conf
+
 Choose a legit looking username
 ```python
 def_username = 'honeycreds' 
