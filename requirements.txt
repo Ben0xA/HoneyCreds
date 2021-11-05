@@ -2,3 +2,4 @@ smbprotocol
 cffi
 splunk-sdk
 configparser
+requests
